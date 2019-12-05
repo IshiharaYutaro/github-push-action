@@ -1,6 +1,6 @@
 name: 'GitHub Push'
 description: 'Pushing to GitHub repository local changes'
-author: 'ad-m'
+author: 'ishiharayutaro'
 branding:
   icon: upload-cloud
   color: green
