@@ -9,7 +9,7 @@ REPOSITORY=${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}
 
 echo "Push to branch $INPUT_BRANCH";
 [ -z "${INPUT_GITHUB_TOKEN}" ] && {
-    echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN }}".';
+    echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN_WRITE }}".';
     exit 1;
 };
 
@@ -21,6 +21,6 @@ mkdir ${INPUT_DIRECTORY}
 rsync -a ./ ./${INPUT_DIRECTORY}/ --exclude ./${INPUT_DIRECTORY}/
 #cd ${INPUT_DIRECTORY}
 
-remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
+remote_repo="https://${GITHUB_ACTOR}:${ secrets.GITHUB_TOKEN_WRITE}@github.com/${REPOSITORY}.git"
 
 git push "${remote_repo}" HEAD:${INPUT_BRANCH} --follow-tags $_FORCE_OPTION;
