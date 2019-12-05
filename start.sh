@@ -31,7 +31,7 @@ remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITO
 
 git clone "${remote_repo}" push_repo
 
-rsync -a ./ ./push_repo/${INPUT_DIRECTORY}/ --exclude ./push_repo/ ./.git
+rsync -av ./ ./push_repo/${INPUT_DIRECTORY}/ --exclude '/push_repo/' --exclude '/.git/' --exclude "/.github/"
 
 cd push_repo
 
