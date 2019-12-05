@@ -16,8 +16,10 @@ echo "Push to branch $INPUT_BRANCH";
 if ${INPUT_FORCE}; then
     _FORCE_OPTION='--force'
 fi
+mkdir ${INPUT_DIRECTORY}
 
-cd ${INPUT_DIRECTORY}
+rsync -a ./ /${INPUT_DIRECTORY}/ --exclude /${INPUT_DIRECTORY}/
+#cd ${INPUT_DIRECTORY}
 
 remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
 
