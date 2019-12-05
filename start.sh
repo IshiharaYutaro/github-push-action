@@ -18,9 +18,18 @@ if ${INPUT_FORCE}; then
 fi
 mkdir ${INPUT_DIRECTORY}
 
-rsync -a ./ ./${INPUT_DIRECTORY}/ --exclude ./${INPUT_DIRECTORY}/
+rsync -a ./ ./${INPUT_DIRECTORY}/ --exclude ./${INPUT_DIRECTORY}/ ./.git
+
+rm -rf .git
+
 #cd ${INPUT_DIRECTORY}
 
 remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
+
+git clone "${remote_repo}"
+
+git add .
+
+git commit -m "Add changes ${remote_repo}" -a
 
 git push "${remote_repo}" HEAD:${INPUT_BRANCH} --follow-tags $_FORCE_OPTION;
