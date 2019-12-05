@@ -40,6 +40,6 @@ git config --local user.email ${INPUT_MAILADDRESS}
 
 git add .
 
-git commit -m "Add changes ${remote_repo}" -a
+git commit -m "Add changes ${INPUT_DIRECTORY}" -a
 
 git push "${remote_repo}" HEAD:${INPUT_BRANCH} --follow-tags $_FORCE_OPTION;
