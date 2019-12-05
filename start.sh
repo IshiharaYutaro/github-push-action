@@ -13,6 +13,11 @@ echo "Push to branch $INPUT_BRANCH";
     exit 1;
 };
 
+[ -z "${INPUT_MAILADDRESS}" ] && {
+    echo 'Missing input MailAddress';
+    exit 1;
+};
+
 if ${INPUT_FORCE}; then
     _FORCE_OPTION='--force'
 fi
@@ -27,6 +32,9 @@ rm -rf .git
 remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
 
 git clone "${remote_repo}"
+
+git config --local user.name ${GITHUB_ACTOR}
+git config --local user.email ${INPUT_MAILADDRESS}
 
 git add .
 
