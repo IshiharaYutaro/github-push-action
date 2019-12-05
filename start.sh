@@ -18,7 +18,7 @@ if ${INPUT_FORCE}; then
 fi
 mkdir ${INPUT_DIRECTORY}
 
-rsync -a ./ /${INPUT_DIRECTORY}/ --exclude /${INPUT_DIRECTORY}/
+rsync -a ./ ./${INPUT_DIRECTORY}/ --exclude ./${INPUT_DIRECTORY}/
 #cd ${INPUT_DIRECTORY}
 
 remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
