@@ -21,9 +21,7 @@ echo "Push to branch $INPUT_BRANCH";
 if ${INPUT_FORCE}; then
     _FORCE_OPTION='--force'
 fi
-mkdir ${INPUT_DIRECTORY}
 
-rsync -a ./ ./${INPUT_DIRECTORY}/ --exclude ./${INPUT_DIRECTORY}/ ./.git
 
 rm -rf .git
 
@@ -31,7 +29,11 @@ rm -rf .git
 
 remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
 
-git clone "${remote_repo}"
+git clone "${remote_repo}" push_repo
+
+rsync -a ./ ./push_repo/${INPUT_DIRECTORY}/ --exclude ./push_repo/ ./.git
+
+cd push_repo
 
 git config --local user.name ${GITHUB_ACTOR}
 git config --local user.email ${INPUT_MAILADDRESS}
